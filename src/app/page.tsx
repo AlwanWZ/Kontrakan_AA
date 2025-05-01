@@ -106,12 +106,10 @@ export default function RentalPromotion() {
             <div className="w-full md:w-1/2 flex flex-col justify-between">
               <div>
                 <div className="flex items-center mb-2">
-                  <Star className="w-4 h-4 text-yellow-400 mr-0.5" />
-                  <Star className="w-4 h-4 text-yellow-400 mr-0.5" />
-                  <Star className="w-4 h-4 text-yellow-400 mr-0.5" />
-                  <Star className="w-4 h-4 text-yellow-400 mr-0.5" />
-                  <Star className="w-4 h-4 text-yellow-400 mr-0.5" />
-                  <span className="text-gray-300 ml-2 text-xs">Kualitas Terbaik</span>
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <Star key={index} className="w-5 h-5 text-yellow-400 fill-current mr-1" />
+                  ))}
+                  <span className="text-gray-300 ml-2 text-sm">Kualitas Terbaik</span>
                 </div>
                 <h2 className="text-lg sm:text-2xl font-bold text-white mb-2 sm:mb-4">Kontrakan Modern & Nyaman</h2>
                 <div className="space-y-2 sm:space-y-4 mb-4">
