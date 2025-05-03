@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { ChevronLeft, ChevronRight, X, Home, Info, MapPin, Phone } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Home, Info, MapPin, Phone, Map } from 'lucide-react';
 
-type KontrakanType = "K1" | "K2";
+type KontrakanType = "K1" | "K2" | "Denah";
 
 const galleries = {
   K1: [
@@ -22,6 +22,9 @@ const galleries = {
     { id: 4, title: "Kamar Mandi", description: "Kamar mandi bersih dengan shower", path: "/k2/7.jpg" },
     { id: 5, title: "Kamar Tidur", description: "Kamar tidur dengan pencahayaan alami", path: "/k2/4.jpg" },
     { id: 6, title: "vidio k2", path: "/k2/v2.mp4" },
+  ],
+  Denah: [
+    { id: 1, title: "Denah Kontrakan", description: "Layout dan rancangan kontrakan", path: "/denah.jpg" },
   ],
 };
 
@@ -43,6 +46,15 @@ const kontrakanInfo = {
     location: "Jl. Tri Tunggal Jaya No. 15, Banjar Margo, Lampung",
     description: "Kontrakan nyaman dengan layout yang efisien. Ideal untuk keluarga. Lingkungan asri dengan ibu kontrakan dan tetangga ramah.",
     status: "Kosong",
+  },
+  Denah: {
+    title: "Denah Kontrakan",
+    price: "",
+    rooms: "",
+    features: ["Layout kontrakan lengkap", "Pembagian ruangan", "Ukuran ruangan"],
+    location: "",
+    description: "Denah lengkap kontrakan untuk membantu Anda memvisualisasikan layout dan pembagian ruangan pada kontrakan kami.",
+    status: "",
   },
 };
 
@@ -89,32 +101,55 @@ export default function GalleryPage() {
         {/* Header */}
         <div className={`mb-10 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
           <h1 className="text-3xl md:text-5xl font-bold text-center text-gray-800 dark:text-white mb-2">
-            Galeri Kontrakan <span className="text-blue-600">{selected}</span>
+            {selected === "Denah" ? "Denah Kontrakan" : `Galeri Kontrakan ${selected}`}
           </h1>
           <div className="flex justify-center mb-4">
             <div className="h-1 w-24 bg-blue-500 rounded"></div>
           </div>
           <p className="text-center text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-sm md:text-base">
-            Jelajahi berbagai sudut dan ruangan dari kontrakan kami yang nyaman dan modern
+            {selected === "Denah" 
+              ? "Lihat layout dan pembagian ruangan kontrakan kami" 
+              : "Jelajahi berbagai sudut dan ruangan dari kontrakan kami yang nyaman dan modern"}
           </p>
         </div>
 
         {/* Tombol Pilih Kontrakan */}
         <div className={`flex flex-wrap justify-center gap-4 mb-8 transition-all duration-1000 delay-200 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-          {(["K1", "K2"] as const).map((k) => (
-            <button
-              key={k}
-              onClick={() => setSelected(k)}
-              className={`px-5 md:px-8 py-3 md:py-4 rounded-full font-semibold text-sm md:text-base transition-all transform hover:scale-105 flex items-center ${
-                selected === k
-                  ? "bg-blue-600 text-white shadow-lg"
-                  : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 shadow"
-              }`}
-            >
-              <Home className="w-5 h-5 md:w-6 md:h-6 mr-2" />
-              Kontrakan {k}
-            </button>
-          ))}
+          <button
+            onClick={() => setSelected("K1")}
+            className={`px-5 md:px-8 py-3 md:py-4 rounded-full font-semibold text-sm md:text-base transition-all transform hover:scale-105 flex items-center ${
+              selected === "K1"
+                ? "bg-blue-600 text-white shadow-lg"
+                : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 shadow"
+            }`}
+          >
+            <Home className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            Kontrakan K1
+          </button>
+          
+          <button
+            onClick={() => setSelected("K2")}
+            className={`px-5 md:px-8 py-3 md:py-4 rounded-full font-semibold text-sm md:text-base transition-all transform hover:scale-105 flex items-center ${
+              selected === "K2"
+                ? "bg-blue-600 text-white shadow-lg"
+                : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 shadow"
+            }`}
+          >
+            <Home className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            Kontrakan K2
+          </button>
+          
+          <button
+            onClick={() => setSelected("Denah")}
+            className={`px-5 md:px-8 py-3 md:py-4 rounded-full font-semibold text-sm md:text-base transition-all transform hover:scale-105 flex items-center ${
+              selected === "Denah"
+                ? "bg-blue-600 text-white shadow-lg"
+                : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 shadow"
+            }`}
+          >
+            <Map className="w-5 h-5 md:w-6 md:h-6 mr-2" />
+            Denah Kontrakan
+          </button>
         </div>
 
         {/* Info Panel */}
@@ -124,9 +159,11 @@ export default function GalleryPage() {
               <Info className="w-4 h-4 md:w-5 md:h-5 mr-2 text-blue-600" />
               {kontrakanInfo[selected].title}
             </h2>
-            <div className="bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-medium px-3 py-1 rounded-full text-sm md:text-base w-fit">
-              {kontrakanInfo[selected].price}
-            </div>
+            {kontrakanInfo[selected].price && (
+              <div className="bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-medium px-3 py-1 rounded-full text-sm md:text-base w-fit">
+                {kontrakanInfo[selected].price}
+              </div>
+            )}
           </div>
           <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base mb-4">
             {kontrakanInfo[selected].description}
@@ -136,12 +173,16 @@ export default function GalleryPage() {
               <li key={index}>{feature}</li>
             ))}
           </ul>
-          <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base mt-4">
-            <strong>Lokasi:</strong> {kontrakanInfo[selected].location}
-          </p>
-          <p className={`text-sm md:text-base mt-2 font-semibold ${kontrakanInfo[selected].status === "Kosong" ? "text-green-600" : "text-red-600"}`}>
-            Status: {kontrakanInfo[selected].status}
-          </p>
+          {kontrakanInfo[selected].location && (
+            <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base mt-4">
+              <strong>Lokasi:</strong> {kontrakanInfo[selected].location}
+            </p>
+          )}
+          {kontrakanInfo[selected].status && (
+            <p className={`text-sm md:text-base mt-2 font-semibold ${kontrakanInfo[selected].status === "Kosong" ? "text-green-600" : "text-red-600"}`}>
+              Status: {kontrakanInfo[selected].status}
+            </p>
+          )}
         </div>
 
         {/* Galeri Foto */}
