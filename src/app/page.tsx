@@ -105,12 +105,12 @@ export default function RentalPromotion() {
             {/* Content */}
             <div className="w-full md:w-1/2 flex flex-col justify-between">
               <div>
-                <div className="flex items-center mb-2">
-                  {Array.from({ length: 5 }, (_, index) => (
-                    <Star key={index} className="w-5 h-5 text-yellow-400 fill-current mr-1" />
-                  ))}
-                  <span className="text-gray-300 ml-2 text-sm">Kualitas Terbaik</span>
-                </div>
+              <div className="flex items-center mb-2">
+                {Array.from({ length: 5 }, (_, index) => (
+                  <Star key={index} className="w-5 h-5 text-yellow-400 fill-current mr-1" />
+                ))}
+                <span className="text-gray-300 ml-2 text-sm">Kualitas Terbaik</span>
+              </div>
                 <h2 className="text-lg sm:text-2xl font-bold text-white mb-2 sm:mb-4">Kontrakan Modern & Nyaman</h2>
                 <div className="space-y-2 sm:space-y-4 mb-4">
                   <div className="flex items-start">
@@ -134,6 +134,7 @@ export default function RentalPromotion() {
 
               {/* Button */}
               <div className="flex flex-col sm:flex-row gap-6 w-full max-w-lg mx-auto mt-8">
+                {/* Button K1 */}
                 <button
                   onClick={() => router.push('/gallery?k=K1')}
                   onMouseEnter={() => setHoverK1(true)}
@@ -144,23 +145,8 @@ export default function RentalPromotion() {
                   <div className="absolute right-0 bottom-0 w-12 h-12 rounded-tl-full bg-blue-800 bg-opacity-20"></div>
                   <span className="relative flex items-center gap-3 z-10">
                     <Home className={`w-6 h-6 ${hoverK1 ? "animate-pulse" : ""}`} />
-                    <span className="text-base sm:text-lg">Lihat Kontrakan K1</span>
+                    <span className="text-base sm:text-lg">Lihat Kontrakan</span>
                     <ArrowRight className={`w-5 h-5 transition-transform duration-300 ${hoverK1 ? "translate-x-1" : ""}`} />
-                  </span>
-                </button>
-                
-                <button
-                  onClick={() => router.push('/gallery?k=K2')}
-                  onMouseEnter={() => setHoverK2(true)}
-                  onMouseLeave={() => setHoverK2(false)}
-                  className="relative bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white px-6 sm:px-8 py-4 rounded-xl font-bold shadow-lg transition-all duration-300 flex items-center justify-center overflow-hidden group w-full"
-                >
-                  <div className="absolute -left-4 w-16 h-16 rounded-full bg-green-400 bg-opacity-30 transition-all duration-300 transform group-hover:scale-150"></div>
-                  <div className="absolute right-0 bottom-0 w-12 h-12 rounded-tl-full bg-green-800 bg-opacity-20"></div>
-                  <span className="relative flex items-center gap-3 z-10">
-                    <Home className={`w-6 h-6 ${hoverK2 ? "animate-pulse" : ""}`} />
-                    <span className="text-base sm:text-lg">Lihat Kontrakan K2</span>
-                    <ArrowRight className={`w-5 h-5 transition-transform duration-300 ${hoverK2 ? "translate-x-1" : ""}`} />
                   </span>
                 </button>
               </div>
